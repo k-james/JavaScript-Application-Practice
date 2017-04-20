@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    
+<style>
+    img {height:250px;}
+    #slideshow {display:none;}
+    .tabMenu {height: 30px;float: left;clear: both;margin-bottom: 0;}
+    #slideshow-nav a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid black;
+    color: black;
+    text-align: center;    
+    text-decoration: none;}
+    #slideshow-nav a.active { background: black;color: #fff;}
+    .tabMenu li {
+        height: 30px;
+        line-height: 30px;
+        float: left;
+        list-style: none;
+        margin-right: 10px;
+        border-top: 1px solid #dedede;
+        border-right: 1px solid #dedede;
+        border-left: 1px solid #dedede;}
+    .tabMenu li.current {position: relative; background: #dedede;}
+    .tabMenu li a {padding: 10px;text-decoration: none;color:black; }
+    #tab-1 { display: block; }
+    .tabContent { width: 600px;padding: 20px; display: none; background:#dedede;}
+    .tab { border: 1px solid #dedede;float: left; margin-bottom: 20px;width: auto;}
+    #accordion { width: 600px; margin-bottom: 400px; padding-bottom: 40px; }
+    .option { padding: 10px;
+        width:600px;
+        float: left;
+        background: pink;
+        border-bottom: 1px solid white;
+        cursor: pointer;
+        height:30px;}
+    .content {
+        padding: 10px;
+        background:#dedede;
+        width: 600px;
+        float: left;
+        height: 100px;}
+    .on {background: gray;border-bottom: gray;}
+    .over {background: gray;}
+    #clearfix { clear:left;}
+</style>        
+    
+</head>
+<body>
+<h1>Slideshow</h1>
+<img id="slide" src="images/IMG_01.JPG">
+<div id="slideshow">
+   <img id="img1" src="images/IMG_01.JPG">
+   <img id="img2" src="images/IMG_02.jpg">
+   <img id="img3" src="images/IMG_03.JPG">
+   <img id="img4" src="images/IMG_04.JPG">
+   <img id="img5" src="images/IMG_05.JPG">
+</div>
+<div id="slideshow-nav">
+    <a href="#img1">1</a>
+    <a href="#img2">2</a>
+    <a href="#img3">3</a>
+    <a href="#img4">4</a>
+    <a href="#img5">5</a>
+</div>   
+<br><br>
+<h1>Tabbed Menu Bar</h1>     
+<div>
+    <ul class="tabMenu">
+        <li class="current"><a href="#tab-1">ONE</a></li>
+        <li><a href="#tab-2">TWO</a></li>
+        <li><a href="#tab-3">THREE</a></li>
+    </ul>
+    <div class="tab">
+    <div id="tab-1" class="tabContent"><p>First Paragraph</p></div>
+    <div id="tab-2" class="tabContent"><p>Second Paragraph</p></div>
+    <div id="tab-3" class="tabContent"><p>Third Paragraph</p></div>
+    </div> 
+</div>   
+
+<br><br>
+
+<h1 id="clearfix">Accordion</h1>                
+<div id="accordion">
+    <div class="option fa fa-caret-right"> Option One</div> 
+    <div class="content">First Content</div>
+    <div class="option fa fa-caret-right"> Option Two</div> 
+    <div class="content">Second Content</div>
+    <div class="option fa fa-caret-right"> Option Three</div> 
+    <div class="content">Third Content</div>                                
+</div>
+       
+            
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+ 
+<script>
+//SLIDE SHOW    
+    $(document).ready(function() {
+        var nextSlide = $("#slideshow img:first-child"),
+            nextSlideSource;
+        setInterval(
+        function () {
+//NAV-->     //$('#slideshow-nav a').addClass('active'); 
+            $("#slide").fadeOut(2000,
+                                function () {
+                if (nextSlide.next().length == 0) {
+                    nextSlide = $("#slideshow img:first-child");
+                }
+                else {
+                    nextSlide = nextSlide.next();
+                }
+                nextSlideSource = nextSlide.attr("src");
+                $("#slide").attr("src", nextSlideSource).fadeIn(2000);
+//NAV-->        //$('#slideshow-nav a').removeClass('active');
+        
+            }
+        )
+    },
+        3000);
+    
+    });
+      
+//TABBED MENU BAR    
+    $(document).ready(function () {
+        $('.tabMenu a').click(function(event) {
+            event.preventDefault();
+            $(this).parent().addClass('current');
+            $(this).parent().siblings().removeClass('current');
+            var tab = $(this).attr('href');
+            $('.tabContent').not(tab).css({"display": "none"});
+            $(tab).fadeIn();
+        });
+    });
+
+//ACCORDION
+    $(document).ready(function() {
+        $('.option').click(function() {
+            $('.option').removeClass('on');
+            $(this).removeClass('fa-caret-down');
+            $(this).addClass('fa-caret-right');
+            $('.content').slideUp();
+            if($(this).next().is(':hidden') == true){
+                $(this).addClass('on');
+                $(this).removeClass('fa-caret-right');
+                $(this).addClass('fa-caret-down');
+                $(this).next().slideDown(800);
+            }
+        });
+        $('.option').mouseover(function() {
+            $(this).addClass('over');
+        }).mouseout(function() {
+            $(this).removeClass('over');
+        });
+        $('.content').hide();
+    });
+    
+    
+    
+
+</script>                 
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Lab 2 - Calculator III</title>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+</head>
+
+<body>
+ <div id="divTwo"></div>
+
+	<input type="text" readonly id="result">
+    <br>
+    <div id="container">
+        <input type="button" id="seven" value="7">
+        <input type="button" id="eight" value="8">
+        <input type="button" id="nine" value="9">
+        <input type="button" id="divide" value="/">
+        <br>
+        <input type="button" id="four" value="4">
+        <input type="button" id="five" value="5">
+        <input type="button" id="six" value="6">
+        <input type="button" id="multiply" value="*">
+        <br>
+        <input type="button" id="one" value="1">
+        <input type="button" id="two" value="2">
+        <input type="button" id="three" value="3">
+        <input type="button" id="subtract" value="-">
+        <br>
+        <input type="button" id="zero" value="0">
+        <input type="button" id="period" value=".">
+        <input type="button" id="add" value="+">
+    </div>
+    <input type="button" id="equal" value="=">
+    <br>
+    
+    <button id='btnOne'>ONE</button>
+    <button id='btnTwo'>TWO</button>
+    <button id='btnThree'>THREE</button>
+    <button id='btnFour'>FOUR</button>
+    <button id='btnFive'>FIVE</button>
+    <br>
+    <br>
+    <div id="divOne"></div>
+    <span class="spanOne"></span>
+    <p><a href="http://google.com">GOOGLE LINK</a></p>
+    <br>
+    <input placeholder='FOCUS' id='inputOne'>
+    <br>
+    <br>
+    <form>
+        <input placeholder='name' type='text' id='name'>
+        <input placeholder='email' type='text' id='email'>
+        <button type='submit'>SUBMIT</button>
+    </form>
+   
+    
+    
+
+
+<script>
+    //PART ONE
+//1
+    $('#btnOne').click(function () {
+        'use strict';
+        window.alert("Button ONE has been clicked");
+    });
+//2    
+    $('#btnTwo').bind('click', function (event) {
+        'use strict';
+        window.alert("Button TWO has been clicked");
+    });
+//3    
+    $('#btnThree').on('click', function (event) {
+        'use strict';
+        window.alert("Button THREE has been clicked");
+    });
+//4    
+    $('#btnFour, #btnFive').on('click', function (event) {
+        'use strict';
+        window.alert("Button FOUR/FIVE has been clicked");
+    });
+//5    
+    $('#divOne').css({'width': '400px',
+                      'background-color': 'gray',
+                      'border-color': 'black',
+                      'border-style': 'solid',
+                     'height': '400px'});
+    $('#divOne').on({
+        //mouseenter: function() {window.alert("MOUSE ENTER"); },
+        //mouseleave: function() {window.alert("MOUSE LEAVE"); },
+        //click: function() {window.alert("MOUSE CLICK")}
+//6        
+        mouseenter: function () {'use strict'; $('span.spanOne').text("MOUSE ENTER"); },
+        mouseleave: function () {'use strict'; $('span.spanOne').text("MOUSE LEAVE"); },
+        click: function () {'use strict'; $('span.spanOne').text("MOUSE CLICK"); }
+    });
+//7
+    $('p a').click(function (event) {
+        'use strict';
+        event.preventDefault();
+        $('a').css({'color': 'red'});
+        window.alert(event.currentTarget + "triggered event");
+    });
+//8
+    $(window).resize(function () {
+        'use strict';
+        $('#divTwo').text($(window).width() + "x" + $(window).height());
+    });
+//9    
+    $('#inputOne').focusin(function () {
+        'use strict';
+        $(this).css({'background': 'gray'});
+    });
+    $('#inputOne').focusout(function () {
+        'use strict';
+        $(this).css({'background': 'white'});
+    });
+//10
+    $('form').submit(function (event) {
+        'use strict';
+        if ($('this input').length === 0) {
+            $('form input').css({'border-style': 'solid',
+                                 'border-color': 'red'});
+            window.alert("REQUIRED");
+            return false;
+        } else {
+            $('form input').css({'border-style': 'solid',
+                                'border-color': 'green'});
+            return true;
+        }
+    });
+
+    
+    
+    //PART 2
+//1
+    $(document).ready(function () {
+        'use strict';
+        $('#container').height(200).css({'border-style': 'solid',
+                                        'border-color': 'pink'});
+        $('input[type*="button"]').width(40).height(40);
+        $('#result').width(200).height(40).css({'background-color': 'pink',
+                                                'font': 'serif',
+                                                'font-color': 'gray',
+                                                'font-size': '20px',
+                                                'border-style': 'dotted',
+                                                'border-width': '5px',
+                                                'border-color': 'pink',
+                                                'margin': '10px'});
+        $('#one').css({'background-color': 'pink',
+                      'border-style': 'dotted',
+                      'border-width': '1px',
+                      'border-color': 'black'});
+        $('#two').css({'background-color': 'pink',
+                      'border-style': 'dashed',
+                      'border-width': '2px',
+                      'border-color': 'black'});
+        $('#three').css({'background-color': 'pink',
+                        'border-style': 'solid',
+                      'border-width': '3px',
+                      'border-color': 'black'});
+        $('#four').css({'background-color': 'pink',
+                       'border-style': 'double',
+                      'border-width': '4px',
+                      'border-color': 'black'});
+        $('#five').css({'background-color': 'pink',
+                       'border-style': 'groove',
+                      'border-width': '5px',
+                      'border-color': 'black'});
+        $('#six').css({'background-color': 'pink',
+                      'border-style': 'ridge',
+                      'border-width': '6px',
+                      'border-color': 'black'});
+        $('#seven').css({'background-color': 'pink',
+                        'border-style': 'inset',
+                      'border-width': '7px',
+                      'border-color': 'black'});
+        $('#eight').css({'background-color': 'pink',
+                        'border-style': 'outset',
+                      'border-width': '8px',
+                      'border-color': 'black'});
+        $('#nine').css({'background-color': 'pink',
+                       'border-style': 'dotted',
+                      'border-width': '9px',
+                      'border-color': 'black'});
+        $('#zero').css({'background-color': 'pink',
+                       'border-style': 'dashed',
+                      'border-width': '10px',
+                      'border-color': 'black'});
+        $('#add').css({'background-color': 'pink',
+                      'border-style': 'solid',
+                      'border-width': '11px',
+                      'border-color': 'black'});
+        $('#subtract').css({'background-color': 'pink',
+                           'border-style': 'double',
+                      'border-width': '12px',
+                      'border-color': 'black'});
+        $('#multiply').css({'background-color': 'pink',
+                           'border-style': 'groove',
+                      'border-width': '13px',
+                      'border-color': 'black'});
+        $('#divide').css({'background-color': 'pink',
+                         'border-style': 'ridge',
+                      'border-width': '14px',
+                      'border-color': 'black'});
+        $('#period').css({'background-color': 'pink',
+                         'border-style': 'inset',
+                      'border-width': '15px',
+                      'border-color': 'black'});
+        $('#equal').css({'background-color': 'pink',
+                        'border-style': 'outset',
+                      'border-width': '16px',
+                         'margin-bottom': '40px',
+                      'border-color': 'black'});
+        
+       
+        window.addEventListener("load", init, false);
+        function init() {
+            var calcBtns = $('input[type*="button"]'),
+                result = $('#result');
+            calcBtns.addEventListener("click", enter, false);
+            function enter(evt) {  
+                if (evt.target.value == "=") {
+                result.value = eval(result.value);
+        }           else if (evt.target.value !== undefined) {
+                        result.value += evt.target.value;
+         }
+     }
+}
+
+        
+    });
+    
+</script>
+</body>
+</html>

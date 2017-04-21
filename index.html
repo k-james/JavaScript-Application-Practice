@@ -215,18 +215,20 @@
                       'border-color': 'black'});
         
        
-        window.addEventListener("load", init, false);
-        function init() {
-            var calcBtns = $('input[type*="button"]'),
-                result = $('#result');
-            calcBtns.addEventListener("click", enter, false);
-            function enter(evt) {  
-                if (evt.target.value == "=") {
-                result.value = eval(result.value);
-        }           else if (evt.target.value !== undefined) {
-                        result.value += evt.target.value;
-         }
-     }
+       window.addEventListener("load", init);
+function init() {
+	var parent = document.getElementById("container");
+	parent.addEventListener("click", createHandlers);
+	 
+	function createHandlers(e) {
+		if (e.target !== e.currentTarget) {
+			document.getElementById("#result").value += e.target.value;
+		}
+	}
+	
+	equal.addEventListener("click", function(){
+		document.getElementById("result").value = eval(document.getElementById("result").value); 
+	});
 }
 
         
